@@ -1,6 +1,6 @@
 # Making our candlestick charts from scratch
 
-https://colab.research.google.com/drive/1pq36e-XgH6PEEoIPGGtbmqDmq2hWZB5l?usp=sharing
+## [Whiteboard link](https://app.eraser.io/workspace/zRhl6N1d3CiJmNi9jwNb?origin=share)
 
 40132982 Elion Abdyli                 
  
