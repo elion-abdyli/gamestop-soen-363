@@ -7,7 +7,7 @@ Hanad-Keysse Mohamed H.
  
 40190387 Aman Singh                   
 
-40200175 Boudour Bannouri             
+ Boudour Bannouri             
 
 # Abstract
 We're gonna collect real-time data streams of cryptocurrency markets with python to populate a Postgres database and a MongoDB database. Preliminary tests resulted in a 2.4 GB json file, from 8 hours of runtime. We will aggregate the data to reproduce the level 1 price and volume data represented by candlestick charts of that respective time period. 
