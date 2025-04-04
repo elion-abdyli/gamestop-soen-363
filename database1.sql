@@ -106,14 +106,16 @@ INSERT INTO Event (market_id, base_asset, quote_asset, time_utc, price) VALUES
 
 
 -- Insert Order data
-INSERT INTO "Order" (symbol_id, time_utc, qty, type, price) VALUES 
-('CONCORDIA', '2023-12-01 12:00:00', 100.0, 'BUY', 10.5),
-('BTC', '2023-12-01 12:00:00', 0.5, 'SELL', 42000.50);
+
+INSERT INTO "Order" (market_id, base_asset, quote_asset, time_utc, qty, type, price) VALUES 
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT', '2023-12-01 12:00:00', 100.0, 'BUY', 10.5),
+('CONCORDIA-CRYPTO', 'BTC', 'USDT', '2023-12-01 12:00:00', 0.5, 'SELL', 42000.50);
 
 -- Insert Trade data
-INSERT INTO Trade (symbol_id, time_utc, qty, price) VALUES 
-('CONCORDIA', '2023-12-01 12:05:00', 50.0, 10.7),
-('ETH', '2023-12-01 12:00:00', 1.5, 2300.75);
+INSERT INTO Trade (market_id, base_asset, quote_asset, time_utc, qty, price) VALUES 
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT', '2023-12-01 12:05:00', 50.0, 10.7),
+('CONCORDIA-CRYPTO', 'ETH', 'USDT', '2023-12-01 12:00:00', 1.5, 2300.75);
+
 
 -- Insert Symbol_Event relationship
 INSERT INTO Symbol_Event (market_id, base_asset, quote_asset, event_time) VALUES 
