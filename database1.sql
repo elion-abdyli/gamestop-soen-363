@@ -6,14 +6,14 @@ CREATE DOMAIN positive_decimal AS DECIMAL
 -- Create Asset table
 CREATE TABLE Asset (
     asset_id VARCHAR(50) PRIMARY KEY
-    -- Other asset attributes can be added here
+    
 );
 
 -- Create Market table
 CREATE TABLE Market (
     market_id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(100) NOT NULL
-    -- Other market attributes can be added here
+    
 );
 
 -- Create Symbol table (weak entity dependent on Market and Asset)
