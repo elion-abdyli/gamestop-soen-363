@@ -42,8 +42,7 @@ CREATE TABLE "Order" (
     type VARCHAR(50),
     price DECIMAL(18,8),
     PRIMARY KEY (market_id, base_asset, quote_asset, time_utc),
-    FOREIGN KEY (market_id, base_asset, quote_asset, time_utc) 
-        REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
+    FOREIGN KEY (market_id, base_asset, quote_asset, time_utc) REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
 );
 
 -- Create Trade table (subtype of Event)
@@ -55,22 +54,10 @@ CREATE TABLE Trade (
     qty DECIMAL(18,8),
     price DECIMAL(18,8),
     PRIMARY KEY (market_id, base_asset, quote_asset, time_utc),
-    FOREIGN KEY (market_id, base_asset, quote_asset, time_utc) 
-        REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
+    FOREIGN KEY (market_id, base_asset, quote_asset, time_utc) REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
 );
 
--- Create Symbol_Event relationship table (many-to-many)
-CREATE TABLE Symbol_Event (
-    market_id VARCHAR(50),
-    symbol_id VARCHAR(50),
-    event_id VARCHAR(50),
-    event_time TIMESTAMP,
-    PRIMARY KEY (market_id, symbol_id, event_id, event_time),
-    FOREIGN KEY (market_id, symbol_id) REFERENCES Symbol(market_id, baseasset_quoteasset) ON DELETE CASCADE,
-    FOREIGN KEY (event_id, event_time) REFERENCES Event(symbol_id, time_utc) ON DELETE CASCADE
-);
 
--- Create Market_Asset relationship table (many-to-many)
 -- Create Symbol_Event relationship table (many-to-many)
 CREATE TABLE Symbol_Event (
     market_id VARCHAR(50),
@@ -81,7 +68,7 @@ CREATE TABLE Symbol_Event (
     FOREIGN KEY (market_id, base_asset, quote_asset) REFERENCES Symbol(market_id, base_asset, quote_asset) ON DELETE CASCADE,
     FOREIGN KEY (market_id, base_asset, quote_asset, event_time) REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
 );
-
+-- Create Market_Asset relationship table (many-to-many)
 CREATE TABLE Market_Asset (
     market_id VARCHAR(50),
     asset_id VARCHAR(50),
