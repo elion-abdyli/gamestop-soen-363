@@ -82,6 +82,13 @@ CREATE TABLE Symbol_Event (
     FOREIGN KEY (market_id, base_asset, quote_asset, event_time) REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
 );
 
+CREATE TABLE Market_Asset (
+    market_id VARCHAR(50),
+    asset_id VARCHAR(50),
+    PRIMARY KEY (market_id, asset_id),
+    FOREIGN KEY (market_id) REFERENCES Market(market_id) ON DELETE CASCADE,
+    FOREIGN KEY (asset_id) REFERENCES Asset(asset_id) ON DELETE CASCADE
+);
 
 -- ///////////////////////////////////////////////// --
 
@@ -98,17 +105,18 @@ INSERT INTO Market (market_id, name) VALUES
 ('CONCORDIA-CRYPTO', 'Concordia Cryptocurrency Exchange');
 
 -- Insert Symbol data
-INSERT INTO Symbol (market_id, baseasset_quoteasset) VALUES 
-('CONCORDIA-CRYPTO', 'CONCORDIA'),
-('CONCORDIA-CRYPTO', 'BTC'),
-('CONCORDIA-CRYPTO', 'ETH');
+INSERT INTO Symbol (market_id, base_asset, quote_asset) VALUES 
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT'),
+('CONCORDIA-CRYPTO', 'BTC', 'USDT'),
+('CONCORDIA-CRYPTO', 'ETH', 'USDT');
 
 -- Insert Event data 
-INSERT INTO Event (market_id, symbol_id, time_utc, price) VALUES 
-('CONCORDIA-CRYPTO', 'CONCORDIA', '2023-12-01 12:00:00', 10.5),
-('CONCORDIA-CRYPTO', 'CONCORDIA', '2023-12-01 12:05:00', 10.7),
-('CONCORDIA-CRYPTO', 'BTC', '2023-12-01 12:00:00', 42000.50),
-('CONCORDIA-CRYPTO', 'ETH', '2023-12-01 12:00:00', 2300.75);
+INSERT INTO Event (market_id, base_asset, quote_asset, time_utc, price) VALUES 
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT', '2023-12-01 12:00:00', 10.5),
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT', '2023-12-01 12:05:00', 10.7),
+('CONCORDIA-CRYPTO', 'BTC', 'USDT', '2023-12-01 12:00:00', 42000.50),
+('CONCORDIA-CRYPTO', 'ETH', 'USDT', '2023-12-01 12:00:00', 2300.75);
+
 
 -- Insert Order data
 INSERT INTO "Order" (symbol_id, time_utc, qty, type, price) VALUES 
@@ -121,11 +129,12 @@ INSERT INTO Trade (symbol_id, time_utc, qty, price) VALUES
 ('ETH', '2023-12-01 12:00:00', 1.5, 2300.75);
 
 -- Insert Symbol_Event relationship
-INSERT INTO Symbol_Event (market_id, symbol_id, event_id, event_time) VALUES 
-('CONCORDIA-CRYPTO', 'CONCORDIA', 'CONCORDIA', '2023-12-01 12:00:00'),
-('CONCORDIA-CRYPTO', 'CONCORDIA', 'CONCORDIA', '2023-12-01 12:05:00'),
-('CONCORDIA-CRYPTO', 'BTC', 'BTC', '2023-12-01 12:00:00'),
-('CONCORDIA-CRYPTO', 'ETH', 'ETH', '2023-12-01 12:00:00');
+INSERT INTO Symbol_Event (market_id, base_asset, quote_asset, event_time) VALUES 
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT', '2023-12-01 12:00:00'),
+('CONCORDIA-CRYPTO', 'CONCORDIA', 'USDT', '2023-12-01 12:05:00'),
+('CONCORDIA-CRYPTO', 'BTC', 'USDT', '2023-12-01 12:00:00'),
+('CONCORDIA-CRYPTO', 'ETH', 'USDT', '2023-12-01 12:00:00');
+
 
 -- Insert Market_Asset relationship
 INSERT INTO Market_Asset (market_id, asset_id) VALUES 
@@ -142,3 +151,5 @@ SELECT * FROM Event;
 SELECT * FROM "Order";
 SELECT * FROM Trade;
 SELECT * FROM Symbol_Event;
+
+
