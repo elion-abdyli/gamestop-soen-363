@@ -81,7 +81,12 @@ CREATE TABLE Market_Asset (
     FOREIGN KEY (market_id) REFERENCES Market(market_id) ON DELETE CASCADE,
     FOREIGN KEY (asset_id) REFERENCES Asset(asset_id) ON DELETE CASCADE
 );
-
+-- Full access
+Create VIEW priviledged_view_orders AS SELECT * FROM "Order";
+Create VIEW priviledged_view_trades AS SELECT * FROM Trade;
+-- Limited access (Let base user view more attributes if needed)
+CREATE VIEW user_view_orders AS SELECT market_id, base_asset, quote_asset FROM "Order";
+CREATE VIEW user_view_trades AS SELECT market_id, base_asset, quote_asset FROM Trade;
 -- ///////////////////////////////////////////////// --
 
 
