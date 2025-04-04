@@ -1,3 +1,8 @@
+-- No negative decimals
+CREATE DOMAIN positive_decimal AS DECIMAL
+    CHECK (VALUE > 0);
+
+
 -- Create Asset table
 CREATE TABLE Asset (
     asset_id VARCHAR(50) PRIMARY KEY
@@ -38,9 +43,9 @@ CREATE TABLE "Order" (
     base_asset VARCHAR(50),
     quote_asset VARCHAR(50),
     time_utc TIMESTAMP,
-    qty DECIMAL(18,8),
+    qty positive_decimal,
     type VARCHAR(50),
-    price DECIMAL(18,8),
+    price positive_decimal,
     PRIMARY KEY (market_id, base_asset, quote_asset, time_utc),
     FOREIGN KEY (market_id, base_asset, quote_asset, time_utc) REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
 );
@@ -51,8 +56,8 @@ CREATE TABLE Trade (
     base_asset VARCHAR(50),
     quote_asset VARCHAR(50),
     time_utc TIMESTAMP,
-    qty DECIMAL(18,8),
-    price DECIMAL(18,8),
+    qty positive_decimal,
+    price positive_decimal,
     PRIMARY KEY (market_id, base_asset, quote_asset, time_utc),
     FOREIGN KEY (market_id, base_asset, quote_asset, time_utc) REFERENCES Event(market_id, base_asset, quote_asset, time_utc) ON DELETE CASCADE
 );
