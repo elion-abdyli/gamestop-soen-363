@@ -122,10 +122,10 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER validate_symbol_order
 BEFORE INSERT OR UPDATE ON "Order"
-FOR EACH ROW EXECUTE FUNCTION check_valid_symbol();
+FOR EACH ROW EXECUTE FUNCTION validate_symbol();
 CREATE TRIGGER validate_symbol_trade
 BEFORE INSERT OR UPDATE ON Trade
-FOR EACH ROW EXECUTE FUNCTION check_valid_symbol();
+FOR EACH ROW EXECUTE FUNCTION validate_symbol();
 
 
 
