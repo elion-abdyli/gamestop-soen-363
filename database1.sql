@@ -107,14 +107,13 @@ CREATE VIEW user_view_trades AS SELECT market_id, base_asset, quote_asset FROM T
 CREATE FUNCTION validate_symbol() 
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NOT EXISTS (
-        SELECT 1 
-        FROM Symbol 
-        WHERE market_id = NEW.market_id 
-          AND base_asset = NEW.base_asset 
-          AND quote_asset = NEW.quote_asset
-    ) THEN
-        RAISE EXCEPTION 'Invalid symbol';
+ IF NOT EXISTS (
+  SELECT 1 FROM Symbol 
+  WHERE market_id = NEW.market_id 
+  AND base_asset = NEW.base_asset 
+  AND quote_asset = NEW.quote_asset)
+    THEN
+    RAISE EXCEPTION 'Invalid symbol';
     END IF;
     RETURN NEW;
 END;
