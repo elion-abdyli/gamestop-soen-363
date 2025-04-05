@@ -104,7 +104,7 @@ CREATE VIEW user_view_orders AS SELECT market_id, base_asset, quote_asset FROM "
 CREATE VIEW user_view_trades AS SELECT market_id, base_asset, quote_asset FROM Trade;
 -- ///////////////////////////////////////////////// --
 
-CREATE FUNCTION check_valid_symbol() 
+CREATE FUNCTION validate_symbol() 
 RETURNS TRIGGER AS $$
 BEGIN
     IF NOT EXISTS (
@@ -120,10 +120,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER valid_symbol_check_order
+CREATE TRIGGER validate_symbol_order
 BEFORE INSERT OR UPDATE ON "Order"
 FOR EACH ROW EXECUTE FUNCTION check_valid_symbol();
-CREATE TRIGGER valid_symbol_check_order
+CREATE TRIGGER validate_symbol_trade
 BEFORE INSERT OR UPDATE ON Trade
 FOR EACH ROW EXECUTE FUNCTION check_valid_symbol();
 
