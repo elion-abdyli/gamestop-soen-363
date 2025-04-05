@@ -81,6 +81,21 @@ CREATE TABLE Market_Asset (
     FOREIGN KEY (market_id) REFERENCES Market(market_id) ON DELETE CASCADE,
     FOREIGN KEY (asset_id) REFERENCES Asset(asset_id) ON DELETE CASCADE
 );
+
+CREATE TABLE Candlestick (
+    market_id VARCHAR(50),
+    base_asset VARCHAR(50),
+    quote_asset VARCHAR(50),
+    time_interval TIMESTAMP,  
+    open positive_decimal,      
+    close positive_decimal,     
+    high positive_decimal,     
+    low positive_decimal,      
+    volume positive_decimal,    
+    PRIMARY KEY (market_id, base_asset, quote_asset, time_interval),
+    FOREIGN KEY (market_id, base_asset, quote_asset) REFERENCES Symbol(market_id, base_asset, quote_asset) ON DELETE CASCADE
+);
+
 -- Full access
 Create VIEW priviledged_view_orders AS SELECT * FROM "Order";
 Create VIEW priviledged_view_trades AS SELECT * FROM Trade;
